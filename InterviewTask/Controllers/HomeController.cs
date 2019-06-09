@@ -2,6 +2,7 @@
 using Contracts.Models;
 using Contracts.Services;
 using JuniorInterviewTask.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -67,7 +68,7 @@ namespace JuniorInterviewTask.Controllers
          }
          return resultModel;
       }
-
+      
       private bool AllEqual<T>(params T[] values)
       {
          if(values == null || values.Length == 0)

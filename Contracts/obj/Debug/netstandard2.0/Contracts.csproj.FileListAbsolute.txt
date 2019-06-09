@@ -11,4 +11,3 @@ C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\
 C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.csproj.CopyComplete
 C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.dll
 C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.pdb
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.csprojAssemblyReference.cache

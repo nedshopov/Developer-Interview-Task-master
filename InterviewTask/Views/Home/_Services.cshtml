@@ -3,9 +3,14 @@
     <div class="row">
         @foreach(var item in Model)
         {
+            string statusClass = "bg-color-light-grey";
+            if(item.IsOpen)
+            {
+                statusClass = "bg-color-donation-orange";
+            }
             <!-- Marie Curie Helper Service card -->
             <div class="block promomanualblock col-md-4 col-sm-12">
-                <article class="card HELPER-SERVICE-OPEN-CLOSED-CSS-CLASS">
+                <article class="card HELPER-SERVICE-OPEN-CLOSED-CSS-CLASS  @statusClass">
                     <div class="card__main">
                         <!-- Card title -->
                         <header class="card__header">
@@ -33,6 +38,9 @@
                         <hr>
                         <!-- Opening hours information -->
                         <p class="lead text-center">
+                            <h3>
+                                @item.OpenStatusText
+                            </h3>
                             <div>
                                 @Html.Partial("/Views/Home/_OpeningHours.cshtml", item)
                             </div>
