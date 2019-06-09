@@ -1,0 +1,42 @@
+﻿@model JuniorInterviewTask.Models.HelperServiceModel
+@functions
+{
+    string openingHoursRow = "/Views/Home/_OpeningHoursRow.cshtml";
+    MvcHtmlString GetRow(List<int> openingHours)
+    {
+        return @Html.Partial(openingHoursRow, openingHours);
+    }
+}
+@switch(Model.WorkingDays)
+{
+    case JuniorInterviewTask.Models.WorkingDays.EveryDay:
+        <table>
+            <tr><th>Everyday: </th><td>@GetRow(Model.FridayOpeningHours)</td></tr>
+        </table>
+        break;
+    case JuniorInterviewTask.Models.WorkingDays.EverydayButSunday:
+        <table>
+            <tr><th>Monday-Saturday: </th><td>@GetRow(Model.FridayOpeningHours)</td></tr>
+            <tr><th>Sunday: </th><td>@GetRow(Model.SundayOpeningHours)</td></tr>
+        </table>
+        break;
+    case JuniorInterviewTask.Models.WorkingDays.EveryWorkDay:
+        <table>
+            <tr><th>Monday-Friday: </th><td>@GetRow(Model.FridayOpeningHours)</td></tr>
+            <tr><th>Saturday: </th><td>@GetRow(Model.SaturdayOpeningHours)</td></tr>
+            <tr><th>Sunday: </th><td>@GetRow(Model.SundayOpeningHours)</td></tr>
+        </table>
+        break;
+    default:
+    case JuniorInterviewTask.Models.WorkingDays.Other:
+        <table>
+            <tr><th>Monday: </th><td>@GetRow(Model.MondayOpeningHours)</td></tr>
+            <tr><th>Tuesday: </th><td>@GetRow(Model.TuesdayOpeningHours)</td></tr>
+            <tr><th>Wednesday: </th><td>@GetRow(Model.WednesdayOpeningHours)</td></tr>
+            <tr><th>Thursday: </th><td>@GetRow(Model.ThursdayOpeningHours)</td></tr>
+            <tr><th>Friday: </th><td>@GetRow(Model.FridayOpeningHours)</td></tr>
+            <tr><th>Saturday: </th><td>@GetRow(Model.SaturdayOpeningHours)</td></tr>
+            <tr><th>Sunday: </th><td>@GetRow(Model.SundayOpeningHours)</td></tr>
+        </table>
+        break;
+}

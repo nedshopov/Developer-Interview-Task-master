@@ -1,0 +1,5 @@
+﻿@model IList<int>
+@{
+   var output = (@Model[0] == 0 && @Model[1] == 0) ? "Closed" : $" ({@Model[0].ToString("00")} - {@Model[1].ToString("00")})";
+}
+<div style="padding-left:10px">@output</div>

@@ -1,0 +1,14 @@
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\Contracts.deps.json
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\Contracts.dll
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\Contracts.pdb
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\System.Configuration.dll
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\System.Security.dll
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\System.Configuration.xml
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\bin\Debug\netstandard2.0\System.Security.xml
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.AssemblyInfoInputs.cache
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.AssemblyInfo.cs
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.csproj.CopyComplete
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.dll
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.pdb
+C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Contracts\obj\Debug\netstandard2.0\Contracts.csprojAssemblyReference.cache

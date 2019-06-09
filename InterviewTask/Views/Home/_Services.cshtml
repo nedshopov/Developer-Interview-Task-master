@@ -1,0 +1,50 @@
+﻿@model IEnumerable<JuniorInterviewTask.Models.HelperServiceModel>
+<div class="container">
+    <div class="row">
+        @foreach(var item in Model)
+        {
+            <!-- Marie Curie Helper Service card -->
+            <div class="block promomanualblock col-md-4 col-sm-12">
+                <article class="card HELPER-SERVICE-OPEN-CLOSED-CSS-CLASS">
+                    <div class="card__main">
+                        <!-- Card title -->
+                        <header class="card__header">
+                            <h3 class="card__header__h">@item.Title</h3>
+                        </header>
+                        <hr>
+                        <div class="card__description mb-2">
+                            <p class="mb-0">
+                                @item.Description
+                            </p>
+                            <div class="card__arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 42" width="20" height="30" aria-hidden="true" role="img">
+                                    <title>Arrow / view article icon</title>
+                                    <path fill="none"
+                                          stroke="#000"
+                                          stroke-linecap="round"
+                                          stroke-miterlimit="10"
+                                          stroke-width="3"
+                                          d="M1.9 1c4.8 4.1 6.6 7.3 10.6 11.2 2.3 2.2 6.4 6.5 6.5 9.7-2.1 6-4.6 6.8-9.1 11.3C8.5 34.8 2.7 39.6 1 41"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- Contact details -->
+                        <p class="lead text-center">@item.TelephoneNumber</p>
+                        <hr>
+                        <!-- Opening hours information -->
+                        <p class="lead text-center">
+                            <div>
+                                @Html.Partial("/Views/Home/_OpeningHours.cshtml", item)
+                            </div>
+                        </p>
+                    </div>
+                    <a class="card__link--overlay" href="//www.mariecurie.org.uk/help/nursing-services" rel="bookmark" title="Nursing services">
+                        <span class="sr-only">@item.Title</span>
+                    </a>
+                </article>
+            </div>
+        }
+    </div>
+</div>
+
+
