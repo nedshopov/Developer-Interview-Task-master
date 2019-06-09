@@ -1,6 +1,0 @@
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\bin\Debug\netstandard2.0\Application.deps.json
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\bin\Debug\netstandard2.0\Application.dll
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\obj\Debug\netstandard2.0\Application.csprojAssemblyReference.cache
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\obj\Debug\netstandard2.0\Application.csproj.CoreCompileInputs.cache
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\obj\Debug\netstandard2.0\Application.AssemblyInfoInputs.cache
-C:\Users\nedsh\source\repos\Developer-Interview-Task-master\Application\obj\Debug\netstandard2.0\Application.AssemblyInfo.cs
