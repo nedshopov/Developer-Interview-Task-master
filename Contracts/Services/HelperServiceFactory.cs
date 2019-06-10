@@ -94,7 +94,7 @@ namespace Contracts.Services
             {
                 Title = "Liverpool Helper Service",
                 Description = description,
-                Id = Guid.Parse("FD15B5C7-EF00-4623-8CEA-20E7513283FC"),
+                Id = Guid.NewGuid(),
                 MondayOpeningHours = weekdayOpeningTimes,
                 TuesdayOpeningHours = weekdayOpeningTimes,
                 WednesdayOpeningHours = alternativeOpeningTime,

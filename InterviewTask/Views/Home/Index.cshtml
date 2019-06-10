@@ -1,4 +1,4 @@
-﻿@model JuniorInterviewTask.Models.RequestResultModel
+﻿@model JuniorInterviewTask.Models.CollectionResult
 
 <!-- Header -->
 <header class="header header-border mb-4">
@@ -158,7 +158,7 @@
 
     <!-- Create your cards here.  One has been provided as a tempalte for use in your loop based on the results contained within your model -->
     <section>
-        @if(Model.RequestFail)
+        @if(!Model.IsSuccessful)
         {
             <div> @Html.Partial("/Views/Home/_ErrorServiceResponse.cshtml") </div>
         }

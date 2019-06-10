@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<JuniorInterviewTask.Models.HelperServiceModel>
+
+<script src="../../Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
 <div class="container">
     <div class="row">
         @foreach(var item in Model)
@@ -10,6 +12,28 @@
             }
             <!-- Marie Curie Helper Service card -->
             <div class="block promomanualblock col-md-4 col-sm-12">
+                <div>
+                    @{
+                       string city = item.City;
+                       string buttonId = item.Id.ToString() + "button";
+                       }
+                    <script type="text/javascript">
+
+                        $(function () {
+                            var button = "@buttonId";
+                        $(`#`+ button).click(function () {
+                            $.get('@Url.Action("CheckWeather", "Home", new { city = @city })', function (data) {
+                                var key = '@item.Id.ToString()';
+                                var weatherLine = `<div id="${key}">${data}</div>`
+                                $(`#${key}`).replaceWith(weatherLine);
+                            });
+                        });
+                    });
+                    </script>
+
+                    <input type="button" id="@buttonId" value="Check Weather" />
+                    <div id='@item.Id.ToString()'></div>
+                </div>
                 <article class="card HELPER-SERVICE-OPEN-CLOSED-CSS-CLASS  @statusClass">
                     <div class="card__main">
                         <!-- Card title -->

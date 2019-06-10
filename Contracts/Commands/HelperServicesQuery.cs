@@ -1,5 +1,7 @@
 ﻿using Contracts.Models;
 using Contracts.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Contracts.Commands
 {
@@ -26,7 +28,17 @@ namespace Contracts.Commands
       /// </summary>
       public void Handle()
       {
-         Results = repository.Get();
+         IEnumerable<HelperServiceDto> results = repository.Get();
+         IsSuccessful = results.ToList().Where(x => x.MondayOpeningHours == null).Count() == 0;
+         if(IsSuccessful)
+         {
+            SimpleLogger.LogInfo("Request for helper service information successful.");
+         }
+         else
+         {
+            SimpleLogger.LogError("Request for helper service information contians errors.");
+         }
+         Results = results;
       }
    }
 }

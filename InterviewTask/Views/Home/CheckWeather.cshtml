@@ -1,0 +1,12 @@
+﻿@model JuniorInterviewTask.Models.SingleResult
+@if(Model.IsSuccessful)
+{
+    var descriptions = @Model.Result.Weather.Select(x => x.Description);
+    string weather = "Wheater is: " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(string.Join(",", descriptions));
+
+   <div>@weather</div>
+}
+else
+{
+<div>@Model.Message</div>
+}

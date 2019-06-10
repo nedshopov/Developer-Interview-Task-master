@@ -15,5 +15,10 @@ namespace Contracts.Commands
       /// Collection results.
       /// </summary>
       public IEnumerable<T> Results { get; set; }
+
+      /// <summary>
+      /// Whether the request is successful.
+      /// </summary>
+      public bool IsSuccessful { get; set; }
    }
 }

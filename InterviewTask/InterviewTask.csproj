@@ -136,10 +136,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CollectionResult.cs" />
     <Compile Include="Models\HelperServiceModel.cs" />
     <Compile Include="Models\RequestResultModel.cs" />
+    <Compile Include="Models\SingleResult.cs" />
+    <Compile Include="Models\WeatherDescription.cs" />
+    <Compile Include="Models\WeatherInfo.cs" />
     <Compile Include="Models\WorkingDays.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\WeatherService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -182,6 +187,7 @@
     <Content Include="Views\Home\_OpeningHours.cshtml" />
     <Content Include="Views\Home\_OpeningHoursRow.cshtml" />
     <Content Include="Views\Home\_ErrorServiceResponse.cshtml" />
+    <Content Include="Views\Home\CheckWeather.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

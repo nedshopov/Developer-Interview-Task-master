@@ -39,7 +39,8 @@ namespace JuniorInterviewTask.Models
       /// <summary>
       /// Text for the open status.
       /// </summary>
-      public string OpenStatusText {
+      public string OpenStatusText
+      {
          get
          {
             return StatusText();
@@ -47,142 +48,45 @@ namespace JuniorInterviewTask.Models
       }
 
       /// <summary>
+      /// A simplistic method for getting the city name from the title.
+      /// </summary>
+      public string City
+      {
+         get
+         {
+            if(Title.Contains("London"))
+            {
+               return "london";
+            }
+            else
+            {
+               return Title.Replace(" Helper Service", "").Replace(" ", "").Trim().ToLowerInvariant();
+            } 
+         }
+      }
+      /// <summary>
       /// Opening hours for today.
       /// </summary>
       public List<int> OpeningHoursToday { get; set; }
-
-      private bool OpenNow()
-      {
-         bool isOpen;
-         switch(DateTime.Now.DayOfWeek)
-         {
-            case DayOfWeek.Sunday:
-               isOpen = IsOpenAtThisTime(SundayOpeningHours);
-               break;
-            case DayOfWeek.Monday:
-               isOpen = IsOpenAtThisTime(MondayOpeningHours);
-               break;
-            case DayOfWeek.Tuesday:
-               isOpen = IsOpenAtThisTime(TuesdayOpeningHours);
-               break;
-            case DayOfWeek.Wednesday:
-               isOpen = IsOpenAtThisTime(WednesdayOpeningHours);
-               break;
-            case DayOfWeek.Thursday:
-               isOpen = IsOpenAtThisTime(ThursdayOpeningHours);
-               break;
-            case DayOfWeek.Friday:
-               isOpen = IsOpenAtThisTime(FridayOpeningHours);
-               break;
-            case DayOfWeek.Saturday:
-               isOpen = IsOpenAtThisTime(SaturdayOpeningHours);
-               break;
-            default:
-               isOpen = false;
-               break;
-         }
-         return isOpen;
-      }
-
-      private bool IsOpenAtThisTime(List<int> workingHours)
-      {
-         bool isOpen = false;
-         if(HasWorkingHours(workingHours))
-         {
-            isOpen = (DateTime.Now.Hour >= workingHours[0] && DateTime.Now.Hour < workingHours[1]);
-         }
-         return isOpen;
-      }
-
-      private bool OpenOnDay(DayOfWeek day)
-      {
-         bool isOpen;
-         switch(day)
-         {
-            case DayOfWeek.Sunday:
-               isOpen = HasWorkingHours(SundayOpeningHours);
-               break;
-            case DayOfWeek.Monday:
-               isOpen = HasWorkingHours(MondayOpeningHours);
-               break;
-            case DayOfWeek.Tuesday:
-               isOpen = HasWorkingHours(TuesdayOpeningHours);
-               break;
-            case DayOfWeek.Wednesday:
-               isOpen = HasWorkingHours(WednesdayOpeningHours);
-               break;
-            case DayOfWeek.Thursday:
-               isOpen = HasWorkingHours(ThursdayOpeningHours);
-               break;
-            case DayOfWeek.Friday:
-               isOpen = HasWorkingHours(FridayOpeningHours);
-               break;
-            case DayOfWeek.Saturday:
-               isOpen = HasWorkingHours(SaturdayOpeningHours);
-               break;
-            default:
-               isOpen = false;
-               break;
-         }
-         return isOpen;
-      }
-
-      private bool HasWorkingHours(List<int> openHours)
-      {
-         return (openHours[0] != 0 && openHours[1] != 0);
-      }
 
       private string StatusText()
       {
          string statusText;
          if(IsOpen)
          {
-            statusText = "OPEN TODAY UNTIL " + GetClosingTime();
+            statusText = "OPEN TODAY UNTIL " + GetAmPmFormat(GetClosingTime(DateTime.Today.DayOfWeek));
          }
          else
          {
             DayOfWeek nextWorkingDay = FindNextOpenDay();
-            statusText = $"Reopens {nextWorkingDay.ToString()} at {GetOpeningTime(nextWorkingDay)}"; 
+            statusText = $"Reopens {nextWorkingDay.ToString()} at {GetAmPmFormat(GetOpeningTime(nextWorkingDay))}"; 
          }
          return statusText;
       }
 
-      private string GetOpeningTime(DayOfWeek day)
-      {
-         string hour;
-         switch(day)
-         {
-            case DayOfWeek.Sunday:
-               hour = GetAmPmFormat(SundayOpeningHours[0]);
-               break;
-            case DayOfWeek.Monday:
-               hour = GetAmPmFormat(MondayOpeningHours[0]);
-               break;
-            case DayOfWeek.Tuesday:
-               hour = GetAmPmFormat(TuesdayOpeningHours[0]);
-               break;
-            case DayOfWeek.Wednesday:
-               hour = GetAmPmFormat(WednesdayOpeningHours[0]);
-               break;
-            case DayOfWeek.Thursday:
-               hour = GetAmPmFormat(ThursdayOpeningHours[0]);
-               break;
-            case DayOfWeek.Friday:
-               hour = GetAmPmFormat(FridayOpeningHours[0]);
-               break;
-            case DayOfWeek.Saturday:
-               hour = GetAmPmFormat(SaturdayOpeningHours[0]);
-               break;
-            default:
-               hour = string.Empty;
-               break;
-         }
-         return hour;
-      }
-
       private DayOfWeek FindNextOpenDay()
       {
-         DateTime date = DateTime.Today;
+         DateTime date = GetOpeningTime(DateTime.Today.DayOfWeek) >= DateTime.Now.Hour ? DateTime.Today : DateTime.Today.AddDays(1);
          while(!OpenOnDay(date.DayOfWeek))
          {
             date = date.AddDays(1);
@@ -190,37 +94,67 @@ namespace JuniorInterviewTask.Models
          return date.DayOfWeek;
       }
 
-      private string GetClosingTime()
+      private bool OpenNow()
       {
-         string hour;
-         switch(DateTime.Today.DayOfWeek)
+         bool isOpen = false;
+         if(HasWorkingHours(GetWorkingHoursForDay(DateTime.Now.DayOfWeek)))
+         {
+            isOpen = (DateTime.Now.Hour >= GetWorkingHoursForDay(DateTime.Now.DayOfWeek)[0] && DateTime.Now.Hour < GetWorkingHoursForDay(DateTime.Now.DayOfWeek)[1]);
+         }
+         return isOpen;
+      }
+
+      private bool OpenOnDay(DayOfWeek day)
+      {
+         return HasWorkingHours(GetWorkingHoursForDay(day));
+      }
+
+      private bool HasWorkingHours(IList<int> openHours)
+      {
+         return (openHours[0] != 0 && openHours[1] != 0);
+      }
+
+      private int GetOpeningTime(DayOfWeek day)
+      {
+         return GetWorkingHoursForDay(day)[0];
+      }
+
+      private int GetClosingTime(DayOfWeek day)
+      {
+         return GetWorkingHoursForDay(day)[1];
+      }
+
+      private IList<int> GetWorkingHoursForDay(DayOfWeek day)
+      {
+         IList<int> hours;
+         switch(day)
          {
             case DayOfWeek.Sunday:
-               hour = GetAmPmFormat(SundayOpeningHours[1]);
+               hours = SundayOpeningHours;
                break;
             case DayOfWeek.Monday:
-               hour = GetAmPmFormat(MondayOpeningHours[1]);
+               hours = MondayOpeningHours;
                break;
             case DayOfWeek.Tuesday:
-               hour = GetAmPmFormat(TuesdayOpeningHours[1]);
+               hours = TuesdayOpeningHours;
                break;
             case DayOfWeek.Wednesday:
-               hour = GetAmPmFormat(WednesdayOpeningHours[1]);
+               hours = WednesdayOpeningHours;
                break;
             case DayOfWeek.Thursday:
-               hour = GetAmPmFormat(ThursdayOpeningHours[1]);
+               hours = ThursdayOpeningHours;
                break;
             case DayOfWeek.Friday:
-               hour = GetAmPmFormat(FridayOpeningHours[1]);
+               hours = FridayOpeningHours;
                break;
             case DayOfWeek.Saturday:
-               hour = GetAmPmFormat(SaturdayOpeningHours[1]);
+               hours = SaturdayOpeningHours;
                break;
             default:
-               hour = string.Empty;
+               hours = new List<int> {0, 0};
                break;
          }
-         return hour;
+         return hours;
       }
 
       private string GetAmPmFormat(int hour)

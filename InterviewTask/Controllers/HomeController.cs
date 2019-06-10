@@ -2,9 +2,13 @@
 using Contracts.Models;
 using Contracts.Services;
 using JuniorInterviewTask.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace JuniorInterviewTask.Controllers
@@ -29,19 +33,32 @@ namespace JuniorInterviewTask.Controllers
       /// <returns>The result model to use on the view.</returns>
       private RequestResultModel GetResultModel(HelperServicesQuery request)
       {
-         var resultModel = new RequestResultModel();
+         var resultModel = new CollectionResult();
          IList<HelperServiceModel> results = new List<HelperServiceModel>();
-         foreach(HelperServiceDto item in request.Results)
+         if(request.IsSuccessful)
          {
-            if(item.MondayOpeningHours == null)
+            foreach(HelperServiceDto item in request.Results)
             {
-               resultModel.RequestFail = true;
-               break;
+               results.Add(MapToModel(item));
             }
-            results.Add(MapToModel(item));
          }
+         resultModel.IsSuccessful = request.IsSuccessful;
          resultModel.Results = results;
          return resultModel;
+      }
+
+      /// <summary>
+      /// Check weather for a city.
+      /// </summary>
+      /// <param name="city">Name of the city.</param>
+      /// <returns>Partial view with weather information.</returns>
+      [HttpGet]
+      [ActionName("CheckWeather")]
+      public async Task<ActionResult> CheckWeather(string city)
+      {
+         WeatherService service = new WeatherService();
+         SingleResult result = await service.GetWeatherData(city);
+         return PartialView(result);
       }
 
       /// <summary>
