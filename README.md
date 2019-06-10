@@ -1,80 +1,19 @@
 # Developer-Interview-Task
+Thanks for taking your time to check my submission!
 
+## Assumptions
+During the implementation of this task, I had to make several assumptions. Most of them are described as comments on the actual code.
+For the bigger part of the solution, I disregarded completely any stylization of the presentation on the view.
+I also assumed that I was allowed to fix an error with Ids on the service data (2 of them were matching). 
+I was not expected to implement any unit or integration  tests, given the time limitations. 
+I implemented a simple section for working hours on each service. 
 
-## Task
-We would like you to demonstrate your development skills by delivering a single page web site based on a set of requirements that match the way we deliver solutions within our team.
+## Further improvements
+First things I would do, given having more time, would be to structure better the solution and properly separate Application and Web Layer. I would achieve this via dependency injection (for example Structure Map) and IoC container, so I could inject Handlers for different commands/requests, Repositories and services. The lack of DI, lead to implementing few very basic static class helpers -
+for example the SimpleLogger and the SimpleMapper. 
+There are few issues in the current structure (for example having services in both Contracts and Web). At first I assumed that the Helper Services are stored at a local database, so I decided to separate them from the web layer and serve them as data transfer objects, which can be mapped to the actual Model. The actual model has a lot of logic currently, which is not ideal. Rathe,r have few dedicated helper classes that will handle the formatting. I would also restructure the HelperService model to not have 7 lists of integers  and instead have proper models for the working hours. Maybe a dictionary of <WorkingDay, OpenHoursModel>, which would simplify all related operations.
 
-* We don't expect that this task should take longer than **2 hours**.  However, the amount of time you spend is entirely up to you
-* You will need a **GitHub account** to clone this repository (Developer-Interview-Task)
-* Once you have finished, please push it to your own GitHub repository and let us know
+Once again, thanks for your time and feel free to contact me, in case you have any questions.
+Regards,
+Ned
 
-=======
-
-During the face-to-face interview we would like to discuss your solution and your approach. We will expect you to demonstrate how the acceptance criteria have been met and also any challenges you faced during development, together with any enhancements that you'd make if you had further time.
-
-If you have any questions, please get in touch.
-
-*Good luck :)*
-
-## Background
-The Marie Curie Caring Services department wish to better promote their Helper service on the charity's website.
-
-The Helper Service matches trained volunteers with people living with a terminal illness and provides support to them or their families. Support is provided free of charge and is available to people aged 18 or over with any terminal illness, and their families
-
-The Website Scrum team Product Owner and Business Analyst have agreed with the Caring Services team that a page will be developed for the website that will list out available Helper Services; show how they can be contacted and dynamically highlight if and when they can be contacted.
-
-## User Story
-The following user story and acceptance criteria was created and will be used by the team to design and validate their work.
-
-**See image below for an idea of how the page will look - the template has been provided for you**
-
-*"As a website user who needs help and support
-I want to be able to find Helper Services
-so that I know what support is available to me and how to contact them"*
-
-**Background: GIVEN I am on the Marie Curie website**
- 
-**WHEN I view the Helper Service page**
-
-**AC1: Display**
-
-THEN I want to see a list that contains all Marie Curie Helper Services
-
-**AC2: Detail**
-
-THEN each Helper Service list item will have the following properties: Title - linked to a page (https://www.mariecurie.org.uk/help/helper-volunteers), Description, Telephone number and a currently open / closed status
-
-**AC3: Dynamic status**
-
-THEN I want to see whether the helpline is OPEN or CLOSED with the label copy as per below
-
-OPEN - OPEN TODAY UNTIL `{closing time}`
-
-CLOSED - REOPENS `{day}` at `{opening time}`
-
-**AC4: Visual** 
-
-THEN the Helper Service list item displays a clear visual representation of whether it is the service is open or closed
-
-Use grey background on card for closed, and orange for open
-
-The style sheet classes that you will need to use to indicate the closed and open states are –
-
-bg-color-light-grey and
-bg-color-donation-orange
-
-**AC5: Backend**
-
-Create a simple logger service (from scratch, to a file) that can capture all requests made to the service (maybe write out time of access, IP address - anything you'd like), plus log any errors that the application generates.
-
-**AC6: Backend**
-
-We'd like the current weather for each of the helper regions under their name - rough location is fine.  Create a button, that when pressed calls an action on a controller that sends a request to a weather API https://openweathermap.org/current (full documentation on that page) and display the response on the page.  Do not worry too much about the presentation - this isn't a test of front-end skills.  
-
-
-### Integration
-The code that handles the Helper Service inforation has been provided for you.
-
-![capture](https://user-images.githubusercontent.com/42374797/51045249-11033000-15bb-11e9-8b4f-4ba251becf1a.PNG)
-
-       
